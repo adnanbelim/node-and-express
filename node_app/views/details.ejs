@@ -1,0 +1,38 @@
+<%- include('header.ejs') %>
+
+    <div class="container">
+        <h2 class="text-center">User</h2>
+        <table class="table text-center" id="example">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <% if (profile && profile.length> 0) { %>
+                <tbody>
+                    <% for (let i=0; i < profile.length; i++) { %>
+                        <tr>
+                            <td scope="col"><%- profile[i].id %></td>
+                            <td scope="col"><%- profile[i].name %></td>
+                            <td scope="col"><%- profile[i].email %></td>
+                            <td scope="col"><%- profile[i].password %></td>
+                            <td scope="col d-flex">
+                                <a href="/update?id=<%- profile[i].id %>"><i class="bi bi-pencil"></i></a>
+                                <a href="/delete?id=<%- profile[i].id %>"><i class="bi bi-trash px-2"></i></a>
+                            </td>
+                        </tr>
+                        <% } %>
+                </tbody>
+                <% } else { %>
+                    <tr>
+                        <td colspan="5">No profile found</td>
+                    </tr>
+                    <% } %>
+        </table>
+    </div>
+
+    <%- include('footer.ejs'); %>

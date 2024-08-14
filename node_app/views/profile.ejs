@@ -1,0 +1,80 @@
+<%- include('header.ejs') %>
+
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-6">
+                <div class="card bg-primary p-5 mt-5 border-light border-3 rounded-4 shadow">
+                    <% if (user) { %>
+                        <% const userImage= user[0].file; %>
+                            <% if (userImage) { %>
+                                <img src="<%= userImage %>?v=<%= Date.now() %>" alt="Profile Image"
+                                    class="card-img-top d-block m-auto rounded-circle border-4 border border-light"
+                                    style="height: 200px; width: 200px;">
+                                <% } else { %>
+                                    <div alt="user-profile"
+                                        class="card-img-top d-block m-auto rounded-circle border-4 border border-light d-flex justify-content-center align-items-center text-light fw-bolder"
+                                        style="height: 200px; width: 200px;">Add Your Image</div>
+                                    <% } %>
+                                        <% } else { %>
+                                            <img src="./default.jpg" alt="user-profile"
+                                                class="card-img-top d-block m-auto rounded-circle border-4 border border-light"
+                                                style="height: 200px; width: 200px;">
+                                            <% } %>
+
+                                                <div class="card-body text-light">
+                                                    <table>
+                                                        <tr>
+                                                            <td class="px-3">
+                                                                <p class="fw-bolder">ID</p>
+                                                            </td>
+                                                            <td>
+                                                                <p>
+                                                                    <%=user[0].id %>
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="px-3">
+                                                                <p class="fw-bolder">NAME</p>
+                                                            </td>
+                                                            <td>
+                                                                <p>
+                                                                    <%= user[0].name %>
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="px-3">
+                                                                <p class="fw-bolder">DESIGNATION</p>
+                                                            </td>
+                                                            <td>
+                                                                <p>
+                                                                    <%=user[0].post %>
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <hr class="w-50 text-light">
+                                                    <div class="px-3">
+                                                        <p class="fw-bolder">DESCRIPTION</p>
+                                                        <p>
+                                                            <%=user[0].desc %>
+                                                        </p>
+                                                    </div>
+                                                    <div class="text-center mt-5">
+                                                        <a href="/update?id=<%=user[0].id %>"
+                                                            class="btn btn-light">Update user</a>
+                                                    </div>
+                                                    <% if (admin) { %>
+                                                        <div class="text-center mt-5">
+                                                            <p>Admin: <%= admin %>
+                                                            </p>
+                                                        </div>
+                                                        <% } %>
+                                                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('footer.ejs') %>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form onsubmit="return submitForm()">
+        <h1>register</h1>
+        Enter Name : <input type="text" name="name">
+        Enter email : <input type="text" name="email">
+        <input type="submit" value="submit" name="submit">
+    </form>
+    <p id="request"></p>
+</body>
+
+<script>
+    function submitForm() {
+        // Retrieve input values
+        var name = document.getElementsByName('name')[0];
+        var email = document.getElementsByName('email')[0];
+
+        // Create XMLHttpRequest object
+        var req = new XMLHttpRequest();
+
+        // Configure request
+        req.open("POST", '/'); // Assuming your server is listening on '/'
+        req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+         // Send the request with the form data
+        req.send("name=" + name.value + "&email=" + email.value);
+
+        // Define what happens on successful data submission
+        req.onreadystatechange = function () {
+            if (req.readyState == 4 && req.status == 200) {
+                //alert(req.responseText); // Alert the response from server
+
+                document.getElementById("request").innerHTML = req.responseText;
+
+                // after submission refress input tags
+                name.value = "";
+                email.value = ""
+            }
+        };
+
+       
+
+        // Prevent the default form submission
+        return false;
+    }
+</script>
+
+
+</html>

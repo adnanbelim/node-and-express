@@ -1,0 +1,28 @@
+:root{
+    --head-color: #00BFFF; 
+}
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.header, .footer{
+    background-color: var(--head-color);
+}
+.toggle{
+        width: 35px;
+        height: 5px;
+        background-color: rgb(255, 255, 255);
+        margin: 6px 0;
+}
+.nav-link{
+    color: #fff !important;
+}
+.navbar-toggler{
+    color: #fff !important;
+}
+
+#myTable_wrapper {
+    overflow-x: auto;
+}

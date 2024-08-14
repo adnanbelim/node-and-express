@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update User</title>
+</head>
+
+<body>
+    <form onsubmit="return submitForm()">
+        <h1>Update User</h1>
+        <input type="hidden" id="userId" value="<%= user[0].id %>">
+        Enter Name : <input type="text" id="userName" value="<%= user[0].name %>">
+        Enter email : <input type="text" id="userEmail" value="<%= user[0].email %>">
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        function submitForm() {
+            // Retrieve input values
+            var id = document.getElementById('userId').value;
+            var name = document.getElementById('userName').value;
+            var email = document.getElementById('userEmail').value;
+
+            // Create XMLHttpRequest object
+            var req = new XMLHttpRequest();
+
+            // Configure request
+            req.open("POST", '/update');
+            req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+            // Send the request with the form data
+            req.send("id=" + id + "&name=" + name + "&email=" + email);
+
+            // Define what happens on successful data submission
+            req.onreadystatechange = function () {
+                if (req.readyState == 4 && req.status == 200) {
+                    alert(req.responseText); // Alert the response from server
+
+                    setTimeout(() => {
+                        window.open('/student', '__self');
+                    },2000)
+
+                    // Reset input fields after submission
+                    document.getElementById('userName').value = "";
+                    document.getElementById('userEmail').value = "";
+                }
+            };
+
+            // Prevent the default form submission
+            return false;
+        }
+    </script>
+</body>
+
+</html>

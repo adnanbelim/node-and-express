@@ -1,0 +1,27 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "description": "a node js learning",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adnanbelim/node.js.git"
+  },
+  "author": "Mohammed Adnan Belim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adnanbelim/node.js/issues"
+  },
+  "homepage": "https://github.com/adnanbelim/node.js#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "mysql": "^2.18.1",
+    "simple-node-logger": "^21.8.12"
+  }
+}

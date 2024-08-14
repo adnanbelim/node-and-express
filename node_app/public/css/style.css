@@ -1,0 +1,26 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+h1{
+    background-color: yellow;
+}
+/* Add this CSS to your stylesheet or within a <style> block */
+.table {
+    width: 100%;
+    margin: 20px 0 !important;
+    border-spacing: 0 10px;
+}
+
+.table th,
+.table td {
+    border: 1px solid #ffffff !important;
+    padding: 15px !important;
+}
+
+.table th {
+    background-color: rgb(128, 179, 11) !important;
+    color: #ffffff !important;
+    border: 2px solid white;
+    border-radius: 10px;
+}

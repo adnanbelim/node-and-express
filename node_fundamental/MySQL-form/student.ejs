@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <% %> it use to write code
+    <%= %> it used to accept parameter
+    <%- %> it used to show object -->
+
+<h1>search student</h1>
+<div>
+    <form action="/search">
+        <input type="search" name="name" placeholder="search by name">
+        <input type="search" name="email" placeholder="search by email">
+        <input type="submit" value="search">
+    </form>
+</div>
+
+    <% if(user.length> 0){ %>
+
+        <table border="1" width="100%">
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>email</th>
+                <th>type</th>
+                <th>action</th>
+            </tr>
+            <% for(i=0; i < user.length; i++) { %>
+            <tr>
+                <td><%- user[i].id %></td>
+                <td><%- user[i].name %></td>
+                <td><%- user[i].email %></td>
+                <td><%- user[i].user_type %></td>
+                <td><a href="/delete?id=<%- user[i].id %>">delete</a>
+                <a href="/update?id=<%- user[i].id %>">update</a></td>
+            </tr>
+            <% } %>
+        </table>
+
+        <% } else {%>
+            <h1>user data not found!!</h1>
+            <% } %>
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <% %> it use to write code
+    <%= %> it used to accept parameter
+    <%- %> it used to show object -->
+
+    <h1>search student</h1>
+    <div>
+        <form onsubmit="return searching()">
+            <input type="search" name="name" placeholder="search by name" id="name" onkeyup="searching()">
+            <input type="search" name="email" placeholder="search by email" id="email" onkeyup="searching()">
+            <input type="submit" value="search">
+        </form>
+    </div>
+
+    <% if(user.length> 0){ %>
+
+        <table border="1" width="100%">
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>email</th>
+                <th>type</th>
+                <th>action</th>
+            </tr>
+            <% for(i=0; i < user.length; i++) { %>
+                <tr class="remove">
+                    <td><%- user[i].id %></td>
+                    <td><%- user[i].name %></td>
+                    <td><%- user[i].email %></td>
+                    <td><%- user[i].user_type %></td>
+                    <td><a href="" onclick="delete_record(this, +`<%- user[i].id %>`)">delete</a>
+
+
+                        <a href="/update?id=<%- user[i].id %>">update</a>
+                    </td>
+                </tr>
+                <% } %>
+        </table>
+
+        <% } else {%>
+            <h1>user data not found!!</h1>
+            <% } %>
+
+
+</body>
+
+<script>
+    function delete_record(obj, id) {
+        var req = new XMLHttpRequest //for stop refresh
+
+        req.open("GET", "/delete?id=" + id, true); //true = async and false =  sync
+        req.send();
+
+        req.onreadystatechange = function () {
+            if (req.readyState == 4 && req.status == 200) {
+                // document.getElementById("respId").innerHTML = req.responseText;
+                alert(req.responseText);
+                obj.parentElement.parentElement.remove(); //id parent => td, td parent => tr then remove
+            }
+        };
+    }
+
+    function searching() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var table = document.getElementsByTagName('table')[0];
+
+            // Clear existing rows
+            document.querySelectorAll('.remove').forEach((ele) => {
+                ele.remove();
+            });
+
+            var req = new XMLHttpRequest();
+            req.open("GET", "/search?name=" + name + "&email=" + email);
+            req.send();
+
+            req.onreadystatechange = function () {
+                if (req.readyState == 4 && req.status == 200) {
+                    var obj = JSON.parse(req.responseText);
+                    if (obj.length > 0) {
+                        for (var i = 0; i < obj.length; i++) {
+                            table.innerHTML += "<tr class='remove'><td>" + obj[i].id + "</td><td>" + obj[i].name + "</td><td>" + obj[i].email + "</td><td>" + obj[i].user_type + "</td><td><a href='#' onclick='delete_record(this, " + obj[i].id + ")'>Delete</a><a href='/update?id=" + obj[i].id + "'>Update</a></td></tr>";
+                        }
+                    } else {
+                        table.innerHTML += "<tr class='remove'><td colspan='5'>Data not found</td></tr>";
+                    }
+                }
+            };
+
+            return false; // Prevent default form submission
+        }
+</script>
+
+</html>

@@ -1,0 +1,30 @@
+<%- include('header.ejs') %>
+
+
+    <div class="container d-flex justify-content-center">
+        <form method="POST" action="/update" enctype="multipart/form-data">
+            <h3 class="text-center">Update Profile</h3>
+            <input type="hidden" name="id" value="<%= user[0].id %>">
+            <div class="mb-3">
+                <label for="exampleInputfile1" class="form-label">Image</label>
+                <input type="file" class="form-control" id="exampleInputfile1" name="samplefile" accept="image/*" value="<%= user[0].file %>">
+            </div>
+    
+            <div class="mb-3">
+                <label for="exampleInputname1" class="form-label">Name</label>
+                <input type="text" class="form-control" id="exampleInputname1" name="name" value="<%= user[0].name %>">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputDOB1" class="form-label">Post</label>
+                <input type="text" class="form-control" id="exampleInputDOB1" name="post" value="<%= user[0].post %>">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputQualification1" class="form-label">Description</label>
+                <input type="text" class="form-control" id="exampleInputQualification1" name="desc" value="<%= user[0].desc %>">
+            </div>
+    
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <%- include('footer.ejs') %>
