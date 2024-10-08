@@ -5,7 +5,7 @@ http.createServer((req, resp) => {  //take parameter as function
     resp.write(JSON.stringify(data)); //api body : (first is status code and second is api data)
     resp.write(" I can add more than 1 data through module.exports on other page...");
     resp.end();
-}).listen(5000);
+}).listen(3000);
 
 
 // Informational responses(100 – 199)
