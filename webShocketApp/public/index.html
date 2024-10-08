@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chatapp</title>
+</head>
+<body>
+    <h1>Chat App</h1>
+
+        <input type="text" placeholder="Enter something" id="message" />
+        <button id="sendBtn">Send</button>
+
+        <div id="allMessage"></div>
+
+    <!-- this src handle script on server -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io(); // this method io() on every refresh create a new user of socket
+        const sendBtn = document.getElementById('sendBtn');
+        const messageInput = document.getElementById('message');
+        const allMessage = document.getElementById('allMessage');
+
+        // Take message from server and display
+        socket.on("message", (message) => {
+            // console.log(message);
+            const p = document.createElement('p');
+            p.innerHTML = message;
+            allMessage.appendChild(p);
+            
+        })
+    
+        sendBtn.addEventListener('click', (e) => {
+            const message = messageInput.value;
+            console.log(message);
+            // to send message on server we use emit();
+            socket.emit("user-message", message);
+            
+        })
+    
+    
+    
+    </script>
+</body>
+</html>
